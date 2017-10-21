@@ -10,4 +10,4 @@ export class Dish {
     featured: boolean;
     description: string;
     comments: Comment[];
-}
+};
