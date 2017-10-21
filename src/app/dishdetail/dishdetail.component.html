@@ -43,4 +43,38 @@
     <h4>Loading... Please Wait</h4>
   </div>
 
+  <div fxFlex="40" *ngIf="commentForm.valid">
+    <mat-list>
+      <mat-list-item>
+        <p mat-line>{{ commentForm.value.comment }}</p>
+        <p mat-line>{{ commentForm.value.rating }} Stars</p>
+        <p mat-line>-- {{ commentForm.value.author }}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <!-- <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p> -->
+  <div fxFlex="40">
+    <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <mat-input-container class="full-width" dividerColor="formErrors.author ? 'warn': 'primary'">
+        <input matInput formControlName="author" placeholder="Name" type="text" required>
+        <mat-hint [hidden]="!(formErrors.author)">
+          <span>{{ formErrors.author }}</span>
+        </mat-hint>
+      </mat-input-container>
+
+      <mat-slider min="1" max="5" thumbLabel tickInterval="1" formControlName="rating">
+      </mat-slider>
+
+      <mat-input-container class="full-width" dividerColor="formErrors.comment ? 'warn': 'primary'">
+        <textarea matInput formControlName="comment" placeholder="Your Comment"></textarea>
+        <mat-hint [hidden]="!(formErrors.comment)">
+          <span>{{ formErrors.comment }}</span>
+        </mat-hint>
+      </mat-input-container>
+
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+    </form>
+  </div>
+
 </div>
