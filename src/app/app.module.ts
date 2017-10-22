@@ -22,8 +22,14 @@ import { LoginComponent } from './login/login.component';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
+
+import { baseUrl } from './shared/baseurl';
+
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig'; 
 
 @NgModule({
   declarations: [
@@ -45,9 +51,11 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [DishService, PromotionService, LeaderService],
+  providers: [DishService, PromotionService, LeaderService, ProcessHTTPMsgService,
+    { provide: 'BaseUrl', useValue: baseUrl }],
   entryComponents: [
     LoginComponent
   ],
